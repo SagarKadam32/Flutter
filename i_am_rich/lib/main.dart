@@ -9,10 +9,9 @@ void main() {
           title: Text('I Am Rich'),
           backgroundColor: Colors.blueGrey[900],
         ),
-        body: Center(
+        body: const Center(
           child: Image(
-            image: NetworkImage(
-                'http://www.architecture-student.com/wp-content/uploads/2011/08/final-site.jpg'),
+            image: AssetImage('images/diamond.png'),
           ),
         ),
       ),
