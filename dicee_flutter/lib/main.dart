@@ -15,11 +15,28 @@ void main() {
   ));
 }
 
-class DicePage extends StatelessWidget {
+class DicePage extends StatefulWidget {
+  const DicePage({Key? key}) : super(key: key);
+
+  @override
+  State<DicePage> createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
   @override
   Widget build(BuildContext context) {
-    var leftDiceNumber = 5;
-    var rightDiceNumber = 1;
+    return const Placeholder();
+  }
+}
+
+class DicePage extends StatelessWidget {
+  int leftDiceNumber = 5;
+  int rightDiceNumber = 1;
+
+  @override
+  Widget build(BuildContext context) {
+    leftDiceNumber = 1;
+    rightDiceNumber = 3;
     return Center(
       child: Row(
         children: [
