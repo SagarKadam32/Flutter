@@ -30,10 +30,19 @@ class Ball extends StatefulWidget {
 }
 
 class _BallState extends State<Ball> {
+  void ballButtonClicked() {
+    print('I got clicked!');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Image.asset('images/ball1.png'),
+      child: TextButton(
+        child: Image.asset('images/ball1.png'),
+        onPressed: () {
+          ballButtonClicked();
+        },
+      ),
     );
   }
 }
