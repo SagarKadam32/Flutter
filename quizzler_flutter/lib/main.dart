@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'Question.dart';
 import 'quiz_brain.dart';
 
+QuizBrain quizBrain = QuizBrain();
 void main() {
   runApp(Quizzler());
 }
@@ -44,7 +44,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                QuizBrain().questionBank[questionNumber].questionText,
+                quizBrain.questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
@@ -71,7 +71,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked true.
                 bool correctAnswer =
-                    QuizBrain().questionBank[questionNumber].questionAnswer;
+                    quizBrain.questionBank[questionNumber].questionAnswer;
                 if (correctAnswer == true) {
                   print('User got it right!');
                   scoreKeeper.add(
@@ -91,7 +91,7 @@ class _QuizPageState extends State<QuizPage> {
                 }
 
                 setState(() {
-                  if (questionNumber < QuizBrain().questionBank.length - 1) {
+                  if (questionNumber < quizBrain.questionBank.length - 1) {
                     questionNumber++;
                   } else {
                     questionNumber = 0;
@@ -118,7 +118,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked false.
                 bool correctAnswer =
-                    QuizBrain().questionBank[questionNumber].questionAnswer;
+                    quizBrain.questionBank[questionNumber].questionAnswer;
                 if (correctAnswer == false) {
                   print('User got it right!');
                   scoreKeeper.add(
@@ -137,7 +137,7 @@ class _QuizPageState extends State<QuizPage> {
                   );
                 }
                 setState(() {
-                  if (questionNumber < QuizBrain().questionBank.length - 1) {
+                  if (questionNumber < quizBrain.questionBank.length - 1) {
                     questionNumber++;
                   } else {
                     questionNumber = 0;
