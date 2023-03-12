@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 void main() {
@@ -31,25 +32,52 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
+  void showAlert() {
+    Alert(
+      context: context,
+      type: AlertType.warning,
+      title: "Game Over!!",
+      desc: "You have reached end of the questions.",
+      buttons: [
+        DialogButton(
+          onPressed: () {
+            quizBrain.resetGame();
+            Navigator.pop(context);
+          },
+          width: 140,
+          child: const Text(
+            "Reset Game?",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        )
+      ],
+    ).show();
+  }
+
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getQuestionAnswer();
     setState(() {
-      if (correctAnswer == userPickedAnswer) {
-        scoreKeeper.add(
-          const Icon(
-            Icons.check,
-            color: Colors.green,
-          ),
-        );
+      if (quizBrain.isGameOver()) {
+        scoreKeeper = [];
+        showAlert();
       } else {
-        scoreKeeper.add(
-          const Icon(
-            Icons.close,
-            color: Colors.red,
-          ),
-        );
+        if (correctAnswer == userPickedAnswer) {
+          scoreKeeper.add(
+            const Icon(
+              Icons.check,
+              color: Colors.green,
+            ),
+          );
+        } else {
+          scoreKeeper.add(
+            const Icon(
+              Icons.close,
+              color: Colors.red,
+            ),
+          );
+        }
+        quizBrain.goToNextQuestion();
       }
-      quizBrain.goToNextQuestion();
     });
   }
 

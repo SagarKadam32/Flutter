@@ -2,6 +2,7 @@ import 'question.dart';
 
 class QuizBrain {
   int _questionNumber = 0;
+  bool _resetGame = false;
 
   final List<Question> _questionBank = [
     Question('Some cats are actually allergic to humans', true),
@@ -44,10 +45,26 @@ class QuizBrain {
   }
 
   void goToNextQuestion() {
-    if (_questionNumber < getQuestionsCount() - 1) {
+    if (_questionNumber < (getQuestionsCount() - 1)) {
+      print('Current Question No = $_questionNumber');
+
       _questionNumber++;
     } else {
       _questionNumber = 0;
     }
+  }
+
+  bool isGameOver() {
+    print('Question Number in GameOver == $_questionNumber');
+    if (_questionNumber == (getQuestionsCount() - 1)) {
+      print("Game Over !!!");
+      _resetGame = true;
+    }
+    return _resetGame;
+  }
+
+  void resetGame() {
+    _resetGame = false;
+    _questionNumber = 0;
   }
 }
