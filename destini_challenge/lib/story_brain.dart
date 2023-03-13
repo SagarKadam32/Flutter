@@ -36,19 +36,37 @@ class StoryBrain {
   ];
 
   String getStory() {
-    return _storyData.first.storyTitle;
+    return _storyData[_storyNumber].storyTitle;
   }
 
   String getChoice1() {
-    return _storyData.first.choice1;
+    return _storyData[_storyNumber].choice1;
   }
 
   String getChoice2() {
-    return _storyData.first.choice2;
+    return _storyData[_storyNumber].choice2;
   }
 
-  void nextStory(int storyNumber) {
-    if (storyNumber == 1) {}
+  void nextStory(int choiceNumber) {
+    if (_storyNumber == 0) {
+      if (choiceNumber == 1) {
+        _storyNumber = 2;
+      } else if (choiceNumber == 2) {
+        _storyNumber = 1;
+      }
+    } else if (_storyNumber == 1) {
+      if (choiceNumber == 1) {
+        _storyNumber = 2;
+      } else if (choiceNumber == 2) {
+        _storyNumber = 3;
+      }
+    } else if (_storyNumber == 2) {
+      if (choiceNumber == 1) {
+        _storyNumber = 5;
+      } else if (choiceNumber == 2) {
+        _storyNumber = 4;
+      }
+    }
   }
 }
 
