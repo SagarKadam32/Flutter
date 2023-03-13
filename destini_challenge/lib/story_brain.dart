@@ -76,10 +76,11 @@ class StoryBrain {
   }
 
   bool buttonShouldBeVisible() {
-    bool buttonVisibility = true;
-    if (_storyNumber == 4 || _storyNumber == 5) {
-      buttonVisibility = false;
+    bool buttonVisibility = false;
+    if (_storyNumber == 0 || _storyNumber == 1 || _storyNumber == 2) {
+      buttonVisibility = true;
     }
+    print('StoryNumber=$_storyNumber And ButtonVisibility=$buttonVisibility');
     return buttonVisibility;
   }
 }
