@@ -66,7 +66,13 @@ class StoryBrain {
       } else if (choiceNumber == 2) {
         _storyNumber = 4;
       }
+    } else if (_storyNumber == 3 || _storyNumber == 4 || _storyNumber == 5) {
+      restart();
     }
+  }
+
+  void restart() {
+    _storyNumber = 0;
   }
 }
 
