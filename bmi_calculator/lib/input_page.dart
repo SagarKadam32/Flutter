@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'reusable_card.dart';
+import 'gender_widget.dart';
 
 const bottomContainerHeight = 80.0;
 const reUsableCardColor = Color(0xFF1D1E33);
@@ -74,53 +76,6 @@ class _InputPageState extends State<InputPage> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class GenderWidget extends StatelessWidget {
-  GenderWidget({required this.icon, required this.gender});
-
-  late final IconData icon;
-  final String gender;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 80,
-        ),
-        const SizedBox(
-          height: 15.0,
-        ),
-        Text(
-          gender,
-          style: const TextStyle(
-            fontSize: 18.0,
-            color: Color(0xFF8D8E98),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  ReusableCard({required this.colour, this.childCard});
-  final Color colour;
-  final Widget? childCard;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: colour,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: childCard,
     );
   }
 }
