@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
-const labelTextStyle = TextStyle(
-  fontSize: 18.0,
-  color: Color(0xFF8D8E98),
-);
+import 'constants.dart';
 
 class GenderWidget extends StatelessWidget {
   GenderWidget({required this.icon, required this.gender});
@@ -25,7 +21,7 @@ class GenderWidget extends StatelessWidget {
         ),
         Text(
           gender,
-          style: labelTextStyle,
+          style: kLabelTextStyle,
         ),
       ],
     );
