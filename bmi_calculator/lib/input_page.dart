@@ -30,36 +30,32 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.male;
                       });
                     },
-                    child: ReusableCard(
-                      colour: selectedGender == Gender.male
-                          ? activeCardColor
-                          : inactiveCardColor,
-                      childCard: GenderWidget(
-                          icon: FontAwesomeIcons.mars, gender: 'MALE'),
-                    ),
+                    colour: selectedGender == Gender.male
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    childCard: GenderWidget(
+                        icon: FontAwesomeIcons.mars, gender: 'MALE'),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.female;
                       });
                     },
-                    child: ReusableCard(
-                      colour: selectedGender == Gender.female
-                          ? activeCardColor
-                          : inactiveCardColor,
-                      childCard: GenderWidget(
-                        icon: FontAwesomeIcons.venus,
-                        gender: 'FEMALE',
-                      ),
+                    colour: selectedGender == Gender.female
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    childCard: GenderWidget(
+                      icon: FontAwesomeIcons.venus,
+                      gender: 'FEMALE',
                     ),
                   ),
                 ),
