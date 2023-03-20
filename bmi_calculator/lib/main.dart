@@ -13,12 +13,13 @@ class BMICalculator extends StatelessWidget {
         primaryColor: const Color(0xFF0A0E21),
         scaffoldBackgroundColor: const Color(0xFF0A0E21),
       ),
-      // home: InputPage(),
+      home: InputPage(),
+      /*
       initialRoute: '/',
       routes: {
         '/': (context) => InputPage(),
         '/resultPage': (context) => ResultPage(),
-      },
+      }, */
     );
   }
 }
