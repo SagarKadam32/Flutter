@@ -16,6 +16,8 @@ class ResultPage extends StatelessWidget {
         children: [
           Expanded(
               child: Container(
+            padding: EdgeInsets.all(10.0),
+            alignment: Alignment.bottomLeft,
             child: const Text(
               'Your Results',
               style: kTitleTextStyle,
