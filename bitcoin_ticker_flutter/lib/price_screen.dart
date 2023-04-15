@@ -23,6 +23,15 @@ class _PriceScreenState extends State<PriceScreen> {
     return dropDownItems;
   }
 
+  List<Widget> getCurrencyList() {
+    List<Widget> currencies = [];
+    for (String currency in currenciesList) {
+      var newText = Text(currency);
+      currencies.add(newText);
+    }
+    return currencies;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,13 +72,9 @@ class _PriceScreenState extends State<PriceScreen> {
                 backgroundColor: Colors.lightBlue,
                 itemExtent: 32.0,
                 onSelectedItemChanged: (selectedIndex) {
-                  print(selectedIndex);
+                  print(currenciesList[selectedIndex]);
                 },
-                children: [
-                  Text('USD'),
-                  Text('EUR'),
-                  Text('GBP'),
-                ],
+                children: getCurrencyList(),
               )),
         ],
       ),
