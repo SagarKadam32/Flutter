@@ -24,6 +24,14 @@ class _PriceScreenState extends State<PriceScreen> {
     });
   }
 
+  void getCoinConvertedDataForSelectedCurrency() async {
+    var data = await coinData.getCoinDataForSelectedCurrency(selectedCurrency);
+    setState(() {
+      convertedUSD = data['rate'];
+      outputUSD = convertedUSD.toStringAsFixed(2);
+    });
+  }
+
   Widget getPicker() {
     Widget picker = getIOSPicker();
     if (Platform.isIOS) {
@@ -50,6 +58,7 @@ class _PriceScreenState extends State<PriceScreen> {
         setState(() {
           if (value != null) {
             selectedCurrency = value;
+            getCoinConvertedDataForSelectedCurrency();
           }
         });
       },
@@ -67,6 +76,7 @@ class _PriceScreenState extends State<PriceScreen> {
       itemExtent: 32.0,
       onSelectedItemChanged: (selectedIndex) {
         print(currenciesList[selectedIndex]);
+        getCoinConvertedDataForSelectedCurrency();
       },
       children: currencies,
     );
@@ -100,7 +110,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = $outputUSD USD',
+                  '1 BTC = $outputUSD $selectedCurrency',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
