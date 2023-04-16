@@ -1,3 +1,9 @@
+import 'package:bitcoin_ticker_flutter/services/networking.dart';
+
+const apiKey = 'B8748745-0AE0-4CE1-88F5-44A628C2A46E';
+const baseURL = 'rest.coinapi.io';
+const getExchangeRatesURL = '/v1/exchangerate/BTC/USD';
+
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -28,4 +34,13 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {}
+class CoinData {
+  Future<dynamic> getCoinData() async {
+    NetworkHelper networkHelper = NetworkHelper(baseURL, getExchangeRatesURL, {
+      'apikey': '$apiKey',
+    });
+
+    var coinData = await networkHelper.getData();
+    return coinData;
+  }
+}
