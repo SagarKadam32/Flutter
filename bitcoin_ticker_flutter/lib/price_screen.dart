@@ -16,16 +16,17 @@ class _PriceScreenState extends State<PriceScreen> {
   String outputUSD = '';
   CoinData coinData = CoinData();
 
-  void getConvertedUSDValue() async {
-    var data = await coinData.getCoinData();
+  void getConvertedUSDValue(String baseCurrency) async {
+    var data = await coinData.getCoinData(baseCurrency);
     setState(() {
       convertedUSD = data['rate'];
       outputUSD = convertedUSD.toStringAsFixed(2);
     });
   }
 
-  void getCoinConvertedDataForSelectedCurrency() async {
-    var data = await coinData.getCoinDataForSelectedCurrency(selectedCurrency);
+  void getCoinConvertedDataForSelectedCurrency(String baseCurrency) async {
+    var data = await coinData.getCoinDataForSelectedCurrency(
+        baseCurrency, selectedCurrency);
     setState(() {
       convertedUSD = data['rate'];
       outputUSD = convertedUSD.toStringAsFixed(2);
@@ -40,6 +41,47 @@ class _PriceScreenState extends State<PriceScreen> {
       picker = getAndroidDropdown();
     }
     return picker;
+  }
+
+  List<Widget> getCards() {
+    List<Widget> cards = [];
+    for (String baseCurrency in cryptoList) {
+      cards.add(getCard(baseCurrency));
+    }
+    cards.add(
+      Container(
+        height: 150.0,
+        alignment: Alignment.center,
+        padding: EdgeInsets.only(bottom: 30.0),
+        color: Colors.lightBlue,
+        child: getPicker(),
+      ),
+    );
+    return cards;
+  }
+
+  Widget getCard(String baseCurrency) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+      child: Card(
+        color: Colors.lightBlueAccent,
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+          child: Text(
+            '1 $baseCurrency = $outputUSD $selectedCurrency',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   DropdownButton<String> getAndroidDropdown() {
@@ -58,7 +100,7 @@ class _PriceScreenState extends State<PriceScreen> {
         setState(() {
           if (value != null) {
             selectedCurrency = value;
-            getCoinConvertedDataForSelectedCurrency();
+            getCoinConvertedDataForSelectedCurrency(baseCurrency);
           }
         });
       },
@@ -86,7 +128,7 @@ class _PriceScreenState extends State<PriceScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getConvertedUSDValue();
+    getConvertedUSDValue('BTC');
   }
 
   @override
@@ -96,38 +138,9 @@ class _PriceScreenState extends State<PriceScreen> {
         title: Text('🤑 Coin Ticker'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.lightBlueAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  '1 BTC = $outputUSD $selectedCurrency',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: 150.0,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(bottom: 30.0),
-            color: Colors.lightBlue,
-            child: getPicker(),
-          ),
-        ],
+        children: getCards(),
       ),
     );
   }
